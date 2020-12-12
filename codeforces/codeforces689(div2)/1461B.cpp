@@ -20,7 +20,7 @@ int main()
 		ll n,m;
 		cin>>n>>m;
 		char a[n][m];
-		ll b[n][m];
+		ll b[n][m+1];
 		ll cnt=0;
 		for(ll i=0;i<n;i++)
 		{
@@ -30,28 +30,30 @@ int main()
 				if(a[i][j]=='*')
 				{
 					cnt++;
-					b[i][j]=cnt;
+					b[i][j+1]=cnt;
 				}
 				else
 				{
-					b[i][j]=0;
+					b[i][j+1]=0;
 				}
 			}
 		}
 		ll ans=0;
 		for(ll i=0;i<n;i++)
 		{
-			for(ll j=0;j<m;j++)
+			for(ll j=1;j<=m;j++)
 			{
 				for(ll k=1;k<n;k++)
 				{
-					if(b[i][j]!=0&&j+k<m&&j-k>=0&&i+k<n&&(b[i+k][j+k]-b[i+k][j-k]==2*k)){
+					if(b[i][j]!=0&&j+k<=m&&j-k>0&&i+k<n&&(b[i+k][j+k]-b[i+k][j-k]==2*k)){
 						//cout<<b[i][j]<<" "<<b[i+k][j-k]<<" "<<b[i+k][j+k]<<endl;
 					ans++;}
+					else
+					break;
 				}
 			}
 		}
-		cout<<ans+cnt<<endl;
+		cout<<cnt+ans<<endl;
 	}
     return 0;
 }
